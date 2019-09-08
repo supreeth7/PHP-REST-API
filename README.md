@@ -3,6 +3,6 @@ A simple REST API for e-commerce platforms to fetch data stored in a MySQL datab
 
 ### Note
 
-1. The SQL script for generating the tables can be found in SQL folder.
+1. The SQL script for generating the tables can be found in api_db.sql file.
 2. Configure config/Database.php constants to match your database credentials.
 3. Use of a third-party API tool like POSTMAN is recommended.
