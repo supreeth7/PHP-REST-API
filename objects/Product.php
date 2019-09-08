@@ -66,4 +66,43 @@ class Product
         $this->cat_id = $row['cat_id'];
         $this->cat_name = $row['cat_name'];
     }
+
+    public function update()
+    {
+        $query = "UPDATE " . $this->table_name . " SET name=:name, price=:price, description=:description, cat_id = :cat_id WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->cat_id = htmlspecialchars(strip_tags($this->cat_id));
+        $this->description = htmlspecialchars(strip_tags($this->description));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":price", $this->price);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":cat_id", $this->cat_id);
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function delete()
+    {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+    }
 }
